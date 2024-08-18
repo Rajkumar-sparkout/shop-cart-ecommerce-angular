@@ -1,0 +1,7 @@
+<div *ngIf="message" class="fixed mt-20 top-4 right-4 p-4 rounded-lg shadow-lg z-50 transition-opacity duration-300"
+     [ngClass]="{
+       'bg-green-500 text-white opacity-100': type === 'success',
+       'bg-red-500 text-white opacity-100': type === 'error'
+     }">
+  <p class="text-white">{{ message }}</p>
+</div>

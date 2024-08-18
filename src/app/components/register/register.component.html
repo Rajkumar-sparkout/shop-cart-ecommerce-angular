@@ -1,0 +1,83 @@
+<app-popup [message]="message" [type]="messageType"></app-popup>
+
+<div class="image">
+    <div class="w-full my-32 shadow-md mx-auto max-w-sm login">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" [formGroup]="register" (ngSubmit)="onSubmit()">
+          <h2 class="mb-6 text-xl italic text-center font-semibold leading-none text-gray-900 dark:text-white">Register Here</h2>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+            Name
+          </label>
+          <input formControlName="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Name">
+          <p class="text-red-500 text-sm italic" *ngIf="registerFormControl.name.invalid && registerFormControl.name.touched">Name is required</p>
+        </div>
+        <div class="mb-4">
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                Email
+                </label>
+                <input formControlName="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
+                <p class="text-red-500 text-sm italic" *ngIf="registerFormControl.email.invalid && registerFormControl.email.touched">Email is required</p>
+            </div>
+
+            <div class="text-red-400 text-sm" *ngIf="email?.dirty">
+                <span class="block mt-2 text-sm text-red-600 dark:text-red-500" *ngIf="!email?.value?.match('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')" [ngClass]="{'text-primary': email?.value?.match('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')}">Email should be valid.</span>
+            </div>
+        </div>
+        <div class="mb-4">
+            <div>
+                <label for="user-role" class="inline-flex items-center mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Roles
+                    <button type="button" data-tooltip-target="tooltip-user-role" data-tooltip-style="dark" class="ml-1">
+                        <svg aria-hidden="true" class="w-4 h-4 text-gray-400 hover:text-gray-900 dark:hover:text-white dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                        <span class="sr-only">Show information</span>
+                    </button>
+                    <div id="tooltip-user-role" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 max-w-sm text-xs font-normal text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                        Flowbite provides 7 predefined roles: Owner, Admin, Editor, Contributor and Viewer. Assign the most suitable role to each user, giving them the most appropriate level of control.
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </label>
+                <select id="role"  formControlName="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <option selected >Select</option>
+                    <option *ngFor="let role of roles; let i = index" >{{role}}</option>
+                </select>
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500" *ngIf="registerFormControl.role.invalid && registerFormControl.role.touched">Role is required</p>
+            </div>
+        </div>
+        <div class="mb-4">
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                    Password
+                </label>
+                <input formControlName="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="************">
+                <p class="text-red-500 text-sm italic" *ngIf="registerFormControl.password.invalid && registerFormControl.password.touched">Password is required</p>
+            </div>
+            <div class="text-red-400 text-sm" *ngIf="passwordFormField?.dirty">
+                <span class="block mt-2 text-sm text-red-600 dark:text-red-500" *ngIf="!passwordFormField?.value?.match('^(?=.*[A-Z])')" [ngClass]="{'text-primary': passwordFormField?.value?.match('^(?=.*[A-Z])')}">At least one uppercase letter.</span>
+                <span class="block mt-2 text-sm text-red-600 dark:text-red-500" *ngIf="!passwordFormField?.value?.match('(?=.*[a-z])')" [ngClass]="{'text-primary': passwordFormField?.value?.match('(?=.*[a-z])')}">At least one lowercase letter.</span>
+                <span class="block mt-2 text-sm text-red-600 dark:text-red-500" *ngIf="!passwordFormField?.value?.match('(.*[0-9].*)')" [ngClass]="{'text-primary': passwordFormField?.value?.match('(.*[0-9].*)')}">At least one digit.</span>
+                <span class="block mt-2 text-sm text-red-600 dark:text-red-500" *ngIf="!passwordFormField?.value?.match('(?=.*[!@#$%^&*])')" [ngClass]="{'text-primary': passwordFormField?.value?.match('(?=.*[!@#$%^&*])')}">At least one special character.</span>
+                <span class="block mt-2 text-sm text-red-600 dark:text-red-500" *ngIf="!passwordFormField?.value?.match('.{8,}')" [ngClass]="{'text-primary': passwordFormField?.value?.match('.{8,}')}">At least 8 character long.</span>
+             </div>
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+            Confirm password
+          </label>
+          <input formControlName="confirmPassword" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="confirmPassword" type="password" placeholder="************">
+          <p class="text-red-500 text-sm italic" *ngIf="registerFormControl.confirmPassword.invalid && registerFormControl.confirmPassword.touched">Confirm password is required</p>
+        </div>
+        <div class="flex items-center justify-between">
+          <button [disabled]="register.invalid" [ngClass]="{
+            'bg-cyan-600 hover:bg-cyan-700 text-white': !register.invalid,
+            'bg-gray-300 text-gray-500 cursor-not-allowed': register.invalid }"
+           class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            Submit
+          </button>
+          <p class="text-sm font-light mt-2 text-gray-500 dark:text-gray-400">
+            Already have an account? <a (click)="gotoLogin()" class="font-medium cursor-pointer text-primary-600 hover:underline dark:text-primary-500">Sign in</a>
+        </p>
+        </div>
+      </form>
+    </div>
+</div>

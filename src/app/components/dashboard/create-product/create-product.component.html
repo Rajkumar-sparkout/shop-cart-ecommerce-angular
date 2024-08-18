@@ -1,0 +1,140 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+
+<div id="toast-container" class="fixed top-4 end-4 z-50 w-64"></div>
+
+<div class="p-16 sm:ml-64 mt-6 bg-[#F5F5F6]">
+    <!-- <app-breadcrumb></app-breadcrumb> -->
+    <nav class="flex" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+        <li class="inline-flex items-center">
+          <a routerLink="/dashboard" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-white">
+            <svg class="me-2.5 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+            </svg>
+            Home
+          </a>
+        </li>
+        <li aria-current="page" *ngIf="!id">
+          <div class="flex items-center">
+            <svg class="h-5 w-5 text-gray-400 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+            </svg>
+            <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:ms-2">Create product</span>
+          </div>
+        </li>
+        <li aria-current="page" *ngIf="id">
+          <div class="flex items-center">
+            <svg class="h-5 w-5 text-gray-400 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+            </svg>
+            <span class="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:ms-2">{{id}}</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+    <app-popup [message]="message" [type]="messageType"></app-popup>
+
+    <div class="mt-8 code-example">
+      <div class="w-full p-4 border border-gray-200 bg-gray-50 rounded-t-xl dark:border-gray-600 dark:bg-gray-700">
+        <div class="grid grid-cols-3">
+          <div class="col-span-2 sm:col-span-1">
+            <h4 class="text-2xl font-bold dark:text-white">Products</h4>
+          </div>
+        </div>
+      </div>
+  
+      <div class="code-preview-wrapper">
+        <div id="card-pricing-example"
+          class="flex p-0 bg-white border-gray-200 bg-gradient-to-r code-preview dark:bg-gray-900 border-x dark:border-gray-600">
+          <div class="w-full code-responsive-wrapper">
+            <section class="m-4">
+              <div class="w-full">
+                <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                  <div class="grid gap-6 mb-6 md:grid-cols-1">
+                    <div>
+                      <label for="company_name"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product name</label>
+                        <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        id="label" type="text" formControlName="productName" placeholder="Enter the product name" />          
+                      <p class="mt-2 text-xs text-red-600 dark:text-red-500" *ngIf="productFormControl.productName.touched && productFormControl.productName.invalid">Product name is required</p>
+                    </div>
+                    <div>
+                      <label for="user-role" class="inline-flex items-center mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                          Category
+                          <button type="button" data-tooltip-target="tooltip-user-role" data-tooltip-style="dark" class="ml-1">
+                              <svg aria-hidden="true" class="w-4 h-4 text-gray-400 hover:text-gray-900 dark:hover:text-white dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                              <span class="sr-only">Show information</span>
+                          </button>
+                          <div id="tooltip-user-role" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 max-w-sm text-xs font-normal text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                              Flowbite provides 7 predefined roles: Owner, Admin, Editor, Contributor and Viewer. Assign the most suitable role to each user, giving them the most appropriate level of control.
+                              <div class="tooltip-arrow" data-popper-arrow></div>
+                          </div>
+                      </label>
+                      <select id="user-role"  formControlName="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                          <option >Select</option>
+                          <option  *ngFor="let category of categories; let i = index" >{{category}}</option>
+                      </select>
+                      <p class="mt-2 text-sm text-red-600 dark:text-red-500" *ngIf="productFormControl.category.touched && productFormControl.category.invalid">Please select caregory</p>
+                    </div>
+                    <!-- <div>
+                      <label for="agent_name"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                        <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        id="label" type="text" formControlName="category" placeholder="Enter the category" />
+                        <p class="mt-2 text-xs text-red-600 dark:text-red-500" *ngIf="productFormControl.category.touched && productFormControl.category.invalid">Category is required</p>
+                    </div> -->
+                    <div>
+                      <label for="agent_name"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                        <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        id="label" type="text" formControlName="description" placeholder="Enter the description" />          
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500" *ngIf="productFormControl.description.touched && productFormControl.description.invalid">Description is required</p>
+                    </div>
+                    <div>
+                      <label for="agent_name"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                        <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        id="label" type="number" formControlName="price" placeholder="Enter the price" />
+                        <p class="mt-2 text-xs text-red-600 dark:text-red-500" *ngIf="productFormControl.price.touched && productFormControl.price.invalid">Price is required</p>
+                    </div>
+                    <div>
+                      <label for="agent_name"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Offer</label>
+                        <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        id="label" type="number" formControlName="offer" placeholder="Enter the offer" />
+                        <p class="mt-2 text-xs text-red-600 dark:text-red-500" *ngIf="productFormControl.offer.touched && productFormControl.offer.invalid">Offer is required</p>
+                    </div>
+                    <div>
+                      <label for="agent_name"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
+                        <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        id="label" type="file" (change)="fileChangeEvent($event)" formControlName="image" placeholder="Enter the price" />
+                        <p class="mt-2 text-xs text-red-600 dark:text-red-500" *ngIf="productFormControl.image.touched && productFormControl.image.invalid">Image is required</p>
+                    </div>
+                  </div>
+                  <button type="submit"
+                    class="flex gap-2 items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                    [ngClass]="{
+                      'text-white bg-cyan-700 hover:bg-cyan-900': !productForm.invalid,
+                      'bg-gray-300 text-gray-500 cursor-not-allowed': productForm.invalid }">
+                    <span >Submit</span>
+                  </button>
+                </form>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div class="code-syntax-wrapper">
+        <div class="relative border-gray-200 border-y border-x code-syntax dark:border-gray-600"></div>
+      </div>
+    </div>
+  </div>
