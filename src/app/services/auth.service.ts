@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { User } from '../interfaces/common';
 
 @Injectable({
@@ -20,5 +20,12 @@ export class AuthService {
 
   getUserByEmail(email: string): Observable<User[]>{
     return this.http.get<User[]>(`${this.apiUrl}/users?email=${email}`)
+  }
+
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.get<any[]>(`${this.apiUrl}/users?email=${email}`).pipe(
+      map(users => users.some(user => user.email === email)),
+      catchError(() => of(false))
+    );
   }
 }

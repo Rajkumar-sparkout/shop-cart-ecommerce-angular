@@ -19,7 +19,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CreateProductComponent implements OnInit{
 
-  public categories = ['mobile', "laptop", "computer", "tablet", "LED_tv", "air-cooler", "washine_machine", "fridge"] ;
+  public categories = ['mobile', "laptop", "computer", "tablet", "LED_tv", "air_cooler", "washine_machine", "fridge"] ;
   public imageSrc: string | ArrayBuffer | null = "";
   public message: string = '';
   public messageType: 'success' | 'error' = 'success';
@@ -28,6 +28,7 @@ export class CreateProductComponent implements OnInit{
   public description: any;
   public price: any;
   public offer: any;
+  public rating: any;
   public image: any;
   public products: any;
   public id: any;
@@ -54,6 +55,7 @@ export class CreateProductComponent implements OnInit{
     description: new FormControl('', Validators.required),
     price: new FormControl('', Validators.required),
     offer: new FormControl('', Validators.required),
+    rating: new FormControl('', Validators.required),
     image: new FormControl('', Validators.required),
   });
 
@@ -79,6 +81,7 @@ export class CreateProductComponent implements OnInit{
       description: JSON.parse(JSON.stringify(this.productForm.value.description)),
       price: JSON.parse(JSON.stringify(this.productForm.value.price)),
       offer: JSON.parse(JSON.stringify(this.productForm.value.offer)),
+      rating: JSON.parse(JSON.stringify(this.productForm.value.rating)),
       image: this.imageSrc,
     }
     // const product = this.productForm.value;
@@ -126,6 +129,7 @@ export class CreateProductComponent implements OnInit{
           category: res[0].category,
           description: res[0].description,
           price: res[0].price,
+          rating: res[0].rating,
           offer: res[0].offer,
           // image: res[0].image,
         })

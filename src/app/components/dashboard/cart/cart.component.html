@@ -46,6 +46,12 @@
                             Price
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Discount
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Discounted Price
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Quantity
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -68,7 +74,13 @@
                             {{product.description}}
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                            {{product.price}}
+                            {{product.price | currency}}
+                        </td>
+                        <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                            {{product.offer}} %
+                        </td>
+                        <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                            {{product.discountedPrice | currency}}
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                             {{product.quantity}}
@@ -93,21 +105,17 @@
                             </div>
                         </td> -->
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                            {{product.total}}
+                            {{product.total | currency}}
                         </td>
                         <td class="px-6 py-4">
                             <a (click)="removeProduct(product)" class="font-medium text-red-600 cursor-pointer dark:text-red-500 hover:underline">Remove</a>
                         </td>
                     </tr>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td colspan="5"></td>
+                        <td colspan="7"></td>
                         <td>
                             <strong class="flex pr-10">
-                                Grand total: 
-                                <!-- <svg class="w-4 h-4 mt-0.5 ml-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.7" d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2"/>
-                                </svg> -->
-                                  {{grandTotal | currency}}                                  
+                                Grand total:   {{grandTotal | currency}}                                       
                             </strong>
                         </td>
                         <td>

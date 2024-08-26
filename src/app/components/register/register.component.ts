@@ -83,16 +83,22 @@ export class RegisterComponent implements OnInit {
         delete user.confirmPassword
         const email = user.email 
 
-        // this.authService.getUserByEmail(email as string).subscribe(
-        //   response=> {
-        //     const email = response[0].email
-        //     console.log(email);
+        this.authService.checkEmailExists(email).subscribe(
+          response=> {
+            console.log(response);
             
-        //     if(email == null){
+            
+            if(response){
+              this.message = 'Already registered with this email';
+              this.messageType = 'error';
+              setTimeout(()=> {
+                window.location.href = window.location.href
+              },1000)
+            }
+            else{
               this.authService.createUser(user as User).subscribe( 
                 data=>{
                   if(data){
-                    console.log(data);
                     this.message = 'User registration is success';
                     this.messageType = 'success';
                     setTimeout(()=> {
@@ -106,21 +112,14 @@ export class RegisterComponent implements OnInit {
                   this.messageType = 'error';
                 } 
               )
-            // }
-            // else{
-            //   this.message = 'Already registered with this email';
-            //   this.messageType = 'error';
-            //   setTimeout(()=> {
-            //     window.location.href = window.location.href
-            //   },1000)
-            // }
-          // },
-          // error=> {
-          //   console.log(error);
-          //   this.message = 'Registration failed';
-          //   this.messageType = 'error';
-          // }
-        // )
+            }
+          },
+          error=> {
+            console.log(error);
+            this.message = 'Registration failed';
+            this.messageType = 'error';
+          }
+        )
       }
     } 
   }

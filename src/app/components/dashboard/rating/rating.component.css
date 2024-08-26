@@ -1,0 +1,13 @@
+.rating {
+    display: flex;
+  }
+  
+  .fa-star {
+    color: gold;
+    cursor: pointer;
+  }
+  
+  .fa-star-o {
+    color: lightgray;
+    cursor: pointer;
+  }

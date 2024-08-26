@@ -17,10 +17,15 @@ export interface User {
 }
 
 export interface Product {
+    id: string;
     productName: string;
     category: string;
     description: string;
     price: number;
     offer: number;
+    rating: number;
+    quantity: number;
+    total: number;
+    discountedPrice: number;
     image: string;
 }

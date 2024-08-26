@@ -27,11 +27,6 @@ export class LoginComponent implements OnInit{
     if(localStorage.getItem('email')){
       this.router.navigate(['dashboard']);
     }
-    // else{
-    //   if(localStorage.getItem('role') == 'User' && localStorage.getItem('email')){
-    //     this.router.navigate(['product']);
-    //   }
-    // }
   }
 
   loginForm = new FormGroup({
@@ -53,7 +48,6 @@ export class LoginComponent implements OnInit{
       response=> {
         if(response.length > 0 && response[0].password === password){
           const role = response[0].role
-          console.log(role);
           
           localStorage.setItem('email', email as string);
           localStorage.setItem('role', role);

@@ -21,13 +21,17 @@ export class ProductListComponent implements OnInit{
   public searchKey!: string;
   public message: string = '';
   public messageType: 'success' | 'error' = 'success';
+  public pageSize = 10;
+  public currentPage = 1;
+  // public pagedData: any = [];
 
   constructor(
     private productService: ProductService
   ){}
 
   ngOnInit(): void {
-    this.getAllProducts()
+    this.getAllProducts();
+    this.loadPageData();
   }
 
   getAllProducts(){
@@ -54,5 +58,22 @@ export class ProductListComponent implements OnInit{
       }
     })
   }
+
+  loadPageData() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.productList = this.productList.slice(start, end);
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.loadPageData();
+  }
+
+  totalProducts = new Promise((resolve, reject)=> {
+    setTimeout(()=> {
+      resolve(this.productList.length)
+    }, 500)
+  })
 
 }

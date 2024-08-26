@@ -64,4 +64,9 @@ export class ProductService {
     getProductByCategory(category: string): Observable<Product[]>{
       return this.http.get<Product[]>(`${this.apiUrl}/products?category=${category}`);
     }
+
+
+    updateProductRating(id: string, params: any): Observable<any> {
+      return this.http.patch(`${this.apiUrl}/products?id=${id}`,params);
+    }
 }

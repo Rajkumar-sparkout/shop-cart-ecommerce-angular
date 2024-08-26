@@ -15,6 +15,10 @@ export class NavbarComponent implements OnInit{
   // public logo = "../../../../../assets/images/shop-logo.jpg";
   public cart = false;
   public totalItem: number = 0;
+  public userDropdown: boolean = false;
+  public userRole: any;
+  public email: any;
+
 
   constructor(
     private cartService: CartService,
@@ -26,6 +30,11 @@ export class NavbarComponent implements OnInit{
       this.cart = true;
     }
 
+    if(localStorage.getItem('role')){
+      this.userRole =localStorage.getItem('role')
+      this.email =localStorage.getItem('email')
+    }
+
     this.cartService.getProducts().subscribe((res)=> {
       this.totalItem = res.length;
     })
@@ -33,6 +42,12 @@ export class NavbarComponent implements OnInit{
 
   gotoCart(){
     this.router.navigate(['cart'])
+  }
+
+  marginRight = "100"
+
+  toggleDropdown(){
+    this.userDropdown = !this.userDropdown;
   }
 
   logout(){

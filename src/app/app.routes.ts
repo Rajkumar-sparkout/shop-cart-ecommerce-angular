@@ -23,14 +23,9 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         loadComponent: () => import('./components/dashboard/create-product/create-product.component').then(m => m.CreateProductComponent) 
     },
-    // { 
-    //     path: 'product',
-    //     canActivate: [AuthGuard],
-    //     loadComponent: () => import('./components/dashboard/product/product.component').then(m => m.ProductComponent) 
-    // },
     { 
         path: 'cart',
         canActivate: [AuthGuard],
         loadComponent: () => import('./components/dashboard/cart/cart.component').then(m => m.CartComponent) 
-    },
+    }
 ];
