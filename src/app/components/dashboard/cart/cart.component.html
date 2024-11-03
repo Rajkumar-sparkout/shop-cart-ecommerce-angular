@@ -30,8 +30,8 @@
             </ol>
           </nav>
         <div class="relative mx-5 my-5 overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-md text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table class="w-full text-sm text-left bg-white-50 rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-md text-white-400 bg-white-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-16 py-3">
                             <span class="sr-only">Image</span>
@@ -74,13 +74,13 @@
                             {{product.description}}
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                            {{product.price | currency}}
+                            {{ product.price | currency: 'INR' }}
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                             {{product.offer}} %
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                            {{product.discountedPrice | currency}}
+                            {{ product.discountedPrice | currency: 'INR' }}
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                             {{product.quantity}}
@@ -105,7 +105,7 @@
                             </div>
                         </td> -->
                         <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                            {{product.total | currency}}
+                            {{ product.total | currency: 'INR' }}
                         </td>
                         <td class="px-6 py-4">
                             <a (click)="removeProduct(product)" class="font-medium text-red-600 cursor-pointer dark:text-red-500 hover:underline">Remove</a>
@@ -115,11 +115,11 @@
                         <td colspan="7"></td>
                         <td>
                             <strong class="flex pr-10">
-                                Grand total:   {{grandTotal | currency}}                                       
+                                Grand total:   {{ grandTotal | currency: 'INR' }}                                       
                             </strong>
                         </td>
                         <td>
-                            <button type="button" (click)="removeAllProduct()" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Remove all</button>
+                            <button type="button" (click)="removeAllProduct()" class="focus:outline-none text-white-50 bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 my-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Remove all</button>
                         </td>
                     </tr>
                 </tbody>

@@ -1,5 +1,5 @@
 
-<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+<nav class="fixed top-0 z-50 w-full bg-white-50 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center justify-start rtl:justify-end">
@@ -10,7 +10,7 @@
               </svg>
            </button>
           <a href="https://flowbite.com" class="flex ms-2 md:me-24">
-            <img src="https://www.shutterstock.com/image-vector/shopping-logo-ecommerce-logotype-shooping-260nw-1978607771.jpg" class="h-12 w-40 me-3" alt="FlowBite Logo" />
+            <img src="assets/images/nav-logo.jpg" class="h-12 w-40 me-3" alt="FlowBite Logo" />
           </a>
         </div>
         <div class="flex items-center">
@@ -21,7 +21,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
                   </svg>
                   <span class="sr-only">Notifications</span>
-                  <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full top-1 -end-1 dark:border-gray-900">{{totalItem}}</div>
+                  <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-[#ffff] bg-red-500 border-2 border-white rounded-full top-1 -end-1 dark:border-gray-900">{{totalItem}}</div>
                 </button>
               </div>
               <!-- <div class="pr-5" *ngIf="cart">
@@ -32,11 +32,11 @@
                   class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                   aria-expanded="false" data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>
-                  <img class="w-8 h-8 rounded-full" src="https://st2.depositphotos.com/1104517/11965/v/950/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+                  <img class="w-8 h-8 rounded-full" src="assets/images/profile.jpg"
                     alt="user photo">
                 </button>
               </div>
-              <div *ngIf="userDropdown" class="z-10 bg-white rounded-lg shadow w-60 top-16 right-0 absolute mr-4" id="dropdown-user">
+              <div *ngIf="userDropdown" class="z-10 bg-white-50 rounded-lg shadow w-60 top-16 right-0 absolute mr-4" id="dropdown-user">
                 <div class="px-4 md:px-6 py-3.5 border-[#EBECEF] border-b border-solid">
                   <h4 class="text-lg font-semibold text-[#C55A11] break-words">
                     {{userRole}}
@@ -49,7 +49,7 @@
                   <a (click)="logout()"
                     class="flex justify-between p-3 hover:bg-[#F9EFE7] rounded-lg">
                     <div class="flex items-center gap-3 cursor-pointer"  (click)="logout()">
-                      <img class="w-6 h-6" src="https://pngfreepic.com/wp-content/uploads/2022/12/c8a7b2ce.png?v=1669889560" alt="" />
+                      <img class="w-6 h-6" src="assets/images/logout-logo.png" alt="" />
                       <span class="text-[#0E0E2C] text-sm font-normal cursor-pointer">Logout</span>
                     </div>
                   </a>

@@ -3,9 +3,11 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './guard/auth.guard';
+import { HomeComponent } from './components/home/home.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { 
@@ -27,5 +29,6 @@ export const routes: Routes = [
         path: 'cart',
         canActivate: [AuthGuard],
         loadComponent: () => import('./components/dashboard/cart/cart.component').then(m => m.CartComponent) 
-    }
+    },
+    { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

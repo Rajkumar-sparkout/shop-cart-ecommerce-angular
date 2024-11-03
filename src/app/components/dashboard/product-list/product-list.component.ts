@@ -21,8 +21,9 @@ export class ProductListComponent implements OnInit{
   public searchKey!: string;
   public message: string = '';
   public messageType: 'success' | 'error' = 'success';
-  public pageSize = 10;
   public currentPage = 1;
+  public itemsPerPage = 10;
+
   // public pagedData: any = [];
 
   constructor(
@@ -59,15 +60,22 @@ export class ProductListComponent implements OnInit{
     })
   }
 
-  loadPageData() {
-    const start = (this.currentPage - 1) * this.pageSize;
-    const end = start + this.pageSize;
-    this.productList = this.productList.slice(start, end);
+  get loadPageData() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.productList.slice(start, end).map((item: any, index: any)=> ({
+      ...item,
+      serial: start + index + 1
+    }));
   }
 
   onPageChange(page: number) {
     this.currentPage = page;
-    this.loadPageData();
+    // this.loadPageData();
+  }
+
+  get totalPages(){
+    return Math.ceil(this.productList.length/this.itemsPerPage)
   }
 
   totalProducts = new Promise((resolve, reject)=> {

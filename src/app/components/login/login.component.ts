@@ -60,12 +60,18 @@ export class LoginComponent implements OnInit{
         }else{
           this.message = 'Username or password is wrong';
           this.messageType = 'error';
+          setTimeout(()=> {
+            this.message = '';
+          }, 2000)
         }
       },
       error=> {
         console.log(error);
         this.message = 'Login failed';
         this.messageType = 'error';
+        setTimeout(()=> {
+          this.message = '';
+        }, 2000)
       }
     )
   }

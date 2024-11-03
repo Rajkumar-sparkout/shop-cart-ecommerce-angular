@@ -26,7 +26,7 @@
 
         <section class="pt-4">
             <div class="w-full">
-                <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                <div class="bg-white-50 dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                     <div class="border-b dark:border-gray-700 mx-4">
                         <div class="flex items-center justify-between space-x-4 pt-3">
                             <div class="flex-1 flex items-center space-x-3">
@@ -52,7 +52,7 @@
                             <div class="flex items-center space-x-4">
                                 <div>
                                     <button type="button" [routerLink]="['/create-product']"
-                                        class="flex items-center justify-center text-white bg-cyan-900 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-3 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                                        class="flex items-center justify-center text-[#ffff] bg-cyan-700 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-3 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                             class="h-5 w-5 mr-2">
@@ -89,13 +89,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let product of productList | filter: searchKey; let i = index">
-                                    <td class="px-4 py-2 font-semibold whitespace-nowrap text-wrap">{{startingIndex + i}}</td>
+                                <tr *ngFor="let product of loadPageData | filter: searchKey; let i = index">
+                                    <td class="px-4 py-2 font-semibold whitespace-nowrap text-wrap">{{product.serial}}</td>
                                     <td class="px-2 py-2 w-48 font-semibold whitespace-nowrap text-wrap">{{product?.productName}}</td>
                                     <td class="px-2 py-2 font-semibold whitespace-nowrap text-wrap">{{product?.category}}</td>
                                     <td class="px-2 py-2 w-64 font-semibold whitespace-nowrap text-wrap">{{product?.description}}</td>
-                                    <td class="px-2 py-2 font-semibold whitespace-nowrap text-wrap">{{product?.price}}</td>
-                                    <td class="px-2 py-2 font-semibold whitespace-nowrap text-wrap">{{product?.offer}}</td>
+                                    <td class="px-2 py-2 font-semibold whitespace-nowrap text-wrap">{{product?.price | currency: 'INR'}}</td>
+                                    <td class="px-2 py-2 font-semibold whitespace-nowrap text-wrap">{{product?.offer}} %</td>
                                     <td class="px-2 py-2 font-semibold whitespace-nowrap text-wrap">{{product?.rating}}</td>
                                     <td class="px-2 py-2 whitespace-nowrap text-wrap">
                                         <span class="w-[50px] h-2 flex items-center justify-center">  
@@ -141,24 +141,40 @@
                             </div>
                         </div> -->
                     </div>
+
                     <!-- Pagination Controls -->
-                    <!-- <app-pagination *ngIf="capitalPartnerList?.length > 0" [data]="values" [filter]="filter"
-                        [firstIndex]="startingIndex" (advertisingList)="list($event)" [apiUrl]="apiUrl"
-                        [currentPage]="currentPage" [itemsPerPage]="itemsPerPage" [totalItems]="totalItems"
-                        [totalPages]="totalPages" (pageChanged)="onPageChange($event)"
-                        (startingIndex)="setStartingIndex($event)">
-                    </app-pagination> -->
-                    <div class="rtl:justify-end">
-                        <div class="flex justify-between w-80 mt-4 py-2">
-                            <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1" class="bg-blue-500 text-white px-4 py-2 rounded">
-                              Previous
-                            </button>
-                            <span>Page {{ currentPage }}</span>
-                            <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage * pageSize >= productList.length" class="bg-blue-500 text-white px-4 py-2 rounded">
-                              Next
-                            </button>
-                        </div>
-                    </div>
+                    <div class="flex items-center justify-end space-x-2 mt-4 m-5">
+                        <!-- Previous Button -->
+                        <button
+                          (click)="onPageChange(currentPage - 1)"
+                          [disabled]="currentPage === 1"
+                          class="px-4 py-2 rounded-md border bg-ceruleanBlue-500 text-white-50 hover:bg-ceruleanBlue-600"
+                        >
+                          Previous
+                        </button>
+                      
+                        <!-- Page Number Buttons -->
+                        <button
+                          *ngFor="let page of [].constructor(totalPages); let i = index"
+                          (click)="onPageChange(i + 1)"
+                          [ngClass]="{
+                            'bg-blue-500 text-white-50': currentPage === i + 1,
+                            'bg-gray-200 text-gray-700 hover:bg-blue-500 hover:text-white': currentPage !== i + 1
+                          }"
+                          class="px-3 py-1 rounded-md border"
+                        >
+                          {{ i + 1 }}
+                        </button>
+                      
+                        <!-- Next Button -->
+                        <button
+                          (click)="onPageChange(currentPage + 1)"
+                          [disabled]="currentPage === totalPages"
+                          class="px-4 py-2 rounded-md border bg-ceruleanBlue-500 text-white-50 hover:bg-ceruleanBlue-600"
+                        >
+                          Next
+                        </button>
+                      </div>
                 </div>
             </div>
         </section>
